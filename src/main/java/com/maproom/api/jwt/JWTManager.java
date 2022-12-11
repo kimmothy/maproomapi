@@ -1,6 +1,7 @@
-package com.maproom.jwt;
+package com.maproom.api.jwt;
 
 
+import com.maproom.api.domain.Room;
 import io.jsonwebtoken.*;
 
 import java.util.Date;
@@ -13,6 +14,22 @@ public class  JWTManager {
     public String createToken(String key) {
         Claims claims = Jwts.claims().setId(key);
         claims.put("test", "hello world");
+        Date now = new Date();
+//        return null;
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + tokenValidMiliseconds))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
+    }
+
+    public String createRoomToken(Room room, String roomKey) {
+        Claims claims = Jwts.claims().setId(roomKey);
+        claims.put("x", room.getX());
+        claims.put("y", room.getY());
+        claims.put("roomName", room.getRoomName());
+        claims.put("endTime", room.getEndTime());
         Date now = new Date();
 //        return null;
         return Jwts.builder()

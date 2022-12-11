@@ -1,4 +1,4 @@
-package com.maproom.repository;
+package com.maproom.api.repository;
 
 public class MongoDBRepository {
 }

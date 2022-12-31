@@ -10,4 +10,5 @@ public class MongoDBTestModel {
 
     private String name;
     private int age;
+    private String id;
 }
